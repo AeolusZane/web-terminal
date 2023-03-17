@@ -1,7 +1,7 @@
 import { Terminal } from "xterm";
 import "xterm/css/xterm.css";
 import { useCallback, useEffect, useRef } from "react";
-import { AttachAddon } from "./poli";
+import { AttachAddon } from "xterm-addon-attach";
 import axios from "axios";
 
 const socketURL = "ws://127.0.0.1:4000/socket/";
@@ -25,19 +25,10 @@ function WebTerminal() {
     //@ts-ignore
     term.open(document.getElementById("terminal"));
     term.focus();
-    // @ts-ignore
-    const so = BI.initSocket({
-      requestUrl:`${window.location.protocol}//${window.location.hostname}`,
-      webSocketPort:[4000],
-      webSocketContextName: '/socket.io',
-      useJavaxWebSocket:false,
-      webSocketNameSpace:'/'
-    })
-
     async function asyncInitSysEnv() {
-      // const pid = await initSysEnv(term),
-      //   ws = new WebSocket(socketURL + pid),
-      const attachAddon = new AttachAddon(so);
+      const pid = await initSysEnv(term),
+        ws = new WebSocket(socketURL + pid),
+        attachAddon = new AttachAddon(ws);
       term.loadAddon(attachAddon);
     }
     asyncInitSysEnv();
