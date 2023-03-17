@@ -20,7 +20,7 @@ function WebTerminal() {
       fontFamily: 'Menlo, Monaco, "Courier New", monospace',
       fontWeight: 400,
       fontSize: 14,
-      rows: 200,
+      rows: 20,
     });
     //@ts-ignore
     term.open(document.getElementById("terminal"));

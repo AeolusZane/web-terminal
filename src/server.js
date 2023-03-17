@@ -11,7 +11,7 @@ function nodeEnvBind() {
   //绑定当前系统 node 环境
   const term = pty.spawn(shell, ["--login"], {
     name: "xterm-color",
-    cols: 80,
+    cols: 800,
     rows: 24,
     cwd: process.env.HOME,
     env: process.env,
